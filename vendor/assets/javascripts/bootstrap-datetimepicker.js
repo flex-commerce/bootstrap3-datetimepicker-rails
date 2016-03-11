@@ -151,6 +151,9 @@
                     }
                 } else {
                     if (tzEnabled) {
+                        /* Work around a bug - https://github.com/flex-commerce/flex-platform/issues/2537 
+                                             - https://github.com/Eonasdan/bootstrap-datetimepicker/issues/1356
+                           It caused the date to be converted to local time each time the calendar popped up.
                         currentZoneOffset = moment().tz(options.timeZone).utcOffset();
                         incomingZoneOffset = moment(d, parseFormats, options.useStrict).utcOffset();
                         if (incomingZoneOffset !== currentZoneOffset) {
@@ -160,6 +163,8 @@
                         } else {
                             returnMoment = moment(d, parseFormats, options.useStrict).tz(options.timeZone);
                         }
+                        */
+                        returnMoment = moment.tz(d, parseFormats, options.timeZone);
                     } else {
                         returnMoment = moment(d, parseFormats, options.useStrict);
                     }
